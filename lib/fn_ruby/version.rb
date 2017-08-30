@@ -11,5 +11,5 @@ Swagger Codegen version: 2.2.3
 =end
 
 module Fn
-  VERSION = "0.1.31"
+  VERSION = "0.1.32"
 end
