@@ -12,7 +12,7 @@ Swagger Codegen version: 2.2.3
 
 require 'date'
 
-module OracleFunctions
+module Fn
 
   class AppsWrapper
     attr_accessor :apps
@@ -152,7 +152,7 @@ module OracleFunctions
           end
         end
       else # model
-        temp_model = OracleFunctions.const_get(type).new
+        temp_model = Fn.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

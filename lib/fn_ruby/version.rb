@@ -10,6 +10,6 @@ Swagger Codegen version: 2.2.3
 
 =end
 
-module OracleFunctions
-  VERSION = "0.1.29"
+module Fn
+  VERSION = "0.1.30"
 end

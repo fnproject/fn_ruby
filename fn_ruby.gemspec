@@ -17,13 +17,13 @@ require "fn_ruby/version"
 
 Gem::Specification.new do |s|
   s.name        = "fn_ruby"
-  s.version     = OracleFunctions::VERSION
+  s.version     = Fn::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Swagger-Codegen"]
   s.email       = ["treeder@gmail.com"]
   s.homepage    = "https://github.com/fnproject/fn_ruby"
-  s.summary     = "Ruby gem for Oracle Functions"
-  s.description = "Ruby gem for Oracle Functions."
+  s.summary     = "Ruby gem for Fn Project"
+  s.description = "Ruby gem for Fn Project."
   # TODO uncommnet and update below with a proper license 
   #s.license     = "Apache 2.0"
   s.required_ruby_version = ">= 1.9"

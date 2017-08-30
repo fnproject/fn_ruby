@@ -12,7 +12,7 @@ Swagger Codegen version: 2.2.3
 
 require "uri"
 
-module OracleFunctions
+module Fn
   class TasksApi
     attr_accessor :api_client
 

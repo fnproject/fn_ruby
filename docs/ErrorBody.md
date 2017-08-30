@@ -1,4 +1,4 @@
-# OracleFunctions::ErrorBody
+# Fn::ErrorBody
 
 ## Properties
 Name | Type | Description | Notes

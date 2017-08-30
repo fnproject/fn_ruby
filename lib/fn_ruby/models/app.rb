@@ -12,7 +12,7 @@ Swagger Codegen version: 2.2.3
 
 require 'date'
 
-module OracleFunctions
+module Fn
 
   class App
     # Name of this app. Must be different than the image name. Can ony contain alphanumeric, -, and _.
@@ -149,7 +149,7 @@ module OracleFunctions
           end
         end
       else # model
-        temp_model = OracleFunctions.const_get(type).new
+        temp_model = Fn.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

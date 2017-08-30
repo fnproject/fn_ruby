@@ -1,4 +1,4 @@
-# OracleFunctions::Route
+# Fn::Route
 
 ## Properties
 Name | Type | Description | Notes

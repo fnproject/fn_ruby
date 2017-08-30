@@ -1,4 +1,4 @@
-# OracleFunctions::Version
+# Fn::Version
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# OracleFunctions::Error
+# Fn::Error
 
 ## Properties
 Name | Type | Description | Notes

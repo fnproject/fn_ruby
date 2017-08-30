@@ -1,4 +1,4 @@
-# OracleFunctions::VersionApi
+# Fn::VersionApi
 
 All URIs are relative to *https://127.0.0.1:8080/v1*
 
@@ -17,13 +17,13 @@ Get daemon version.
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::VersionApi.new
+api_instance = Fn::VersionApi.new
 
 begin
   #Get daemon version.
   result = api_instance.version_get
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling VersionApi->version_get: #{e}"
 end
 ```

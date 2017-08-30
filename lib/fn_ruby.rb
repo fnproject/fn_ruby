@@ -36,10 +36,10 @@ require 'fn_ruby/api/routes_api'
 require 'fn_ruby/api/tasks_api'
 require 'fn_ruby/api/version_api'
 
-module OracleFunctions
+module Fn
   class << self
     # Customize default settings for the SDK using block.
-    #   OracleFunctions.configure do |config|
+    #   Fn.configure do |config|
     #     config.username = "xxx"
     #     config.password = "xxx"
     #   end

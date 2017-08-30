@@ -1,4 +1,4 @@
-# OracleFunctions::TasksApi
+# Fn::TasksApi
 
 All URIs are relative to *https://127.0.0.1:8080/v1*
 
@@ -19,13 +19,13 @@ Gets the next task in the queue, ready for processing. Consumers should start pr
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::TasksApi.new
+api_instance = Fn::TasksApi.new
 
 begin
   #Get next task.
   result = api_instance.tasks_get
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling TasksApi->tasks_get: #{e}"
 end
 ```

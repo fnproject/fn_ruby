@@ -1,4 +1,4 @@
-# OracleFunctions::AppsApi
+# Fn::AppsApi
 
 All URIs are relative to *https://127.0.0.1:8080/v1*
 
@@ -23,7 +23,7 @@ Delete an app.
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::AppsApi.new
+api_instance = Fn::AppsApi.new
 
 app = "app_example" # String | Name of the app.
 
@@ -31,7 +31,7 @@ app = "app_example" # String | Name of the app.
 begin
   #Delete an app.
   api_instance.apps_app_delete(app)
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_app_delete: #{e}"
 end
 ```
@@ -69,7 +69,7 @@ This gives more details about a app, such as statistics.
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::AppsApi.new
+api_instance = Fn::AppsApi.new
 
 app = "app_example" # String | name of the app.
 
@@ -78,7 +78,7 @@ begin
   #Get information for a app.
   result = api_instance.apps_app_get(app)
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_app_get: #{e}"
 end
 ```
@@ -116,18 +116,18 @@ You can set app level settings here.
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::AppsApi.new
+api_instance = Fn::AppsApi.new
 
 app = "app_example" # String | name of the app.
 
-body = OracleFunctions::AppWrapper.new # AppWrapper | App to post.
+body = Fn::AppWrapper.new # AppWrapper | App to post.
 
 
 begin
   #Updates an app.
   result = api_instance.apps_app_patch(app, body)
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_app_patch: #{e}"
 end
 ```
@@ -166,13 +166,13 @@ Get a list of all the apps in the system.
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::AppsApi.new
+api_instance = Fn::AppsApi.new
 
 begin
   #Get all app names.
   result = api_instance.apps_get
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_get: #{e}"
 end
 ```
@@ -207,16 +207,16 @@ Insert a new app
 # load the gem
 require 'fn_ruby'
 
-api_instance = OracleFunctions::AppsApi.new
+api_instance = Fn::AppsApi.new
 
-body = OracleFunctions::AppWrapper.new # AppWrapper | App to post.
+body = Fn::AppWrapper.new # AppWrapper | App to post.
 
 
 begin
   #Post new app
   result = api_instance.apps_post(body)
   p result
-rescue OracleFunctions::ApiError => e
+rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_post: #{e}"
 end
 ```

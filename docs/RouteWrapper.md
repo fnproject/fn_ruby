@@ -1,4 +1,4 @@
-# OracleFunctions::RouteWrapper
+# Fn::RouteWrapper
 
 ## Properties
 Name | Type | Description | Notes

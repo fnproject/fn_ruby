@@ -12,14 +12,14 @@ Swagger Codegen version: 2.2.3
 
 require 'spec_helper'
 
-describe OracleFunctions::Configuration do
-  let(:config) { OracleFunctions::Configuration.default }
+describe Fn::Configuration do
+  let(:config) { Fn::Configuration.default }
 
   before(:each) do
     # uncomment below to setup host and base_path
     #require 'URI'
     #uri = URI.parse("https://127.0.0.1:8080/v1")
-    #OracleFunctions.configure do |c|
+    #Fn.configure do |c|
     #  c.host = uri.host
     #  c.base_path = uri.path
     #end

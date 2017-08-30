@@ -1,4 +1,4 @@
-# OracleFunctions::AppWrapper
+# Fn::AppWrapper
 
 ## Properties
 Name | Type | Description | Notes

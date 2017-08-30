@@ -10,7 +10,7 @@ Swagger Codegen version: 2.2.3
 
 =end
 
-module OracleFunctions
+module Fn
   class ApiError < StandardError
     attr_reader :code, :response_headers, :response_body
 
