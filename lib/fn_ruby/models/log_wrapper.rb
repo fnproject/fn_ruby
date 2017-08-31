@@ -14,29 +14,22 @@ require 'date'
 
 module Fn
 
-  class RouteWrapper
-    attr_accessor :message
-
-    attr_accessor :error
-
-    attr_accessor :route
+  class LogWrapper
+    # Call log entry.
+    attr_accessor :log
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'error' => :'error',
-        :'route' => :'route'
+        :'log' => :'log'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'message' => :'String',
-        :'error' => :'ErrorBody',
-        :'route' => :'Route'
+        :'log' => :'Log'
       }
     end
 
@@ -48,16 +41,8 @@ module Fn
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'message')
-        self.message = attributes[:'message']
-      end
-
-      if attributes.has_key?(:'error')
-        self.error = attributes[:'error']
-      end
-
-      if attributes.has_key?(:'route')
-        self.route = attributes[:'route']
+      if attributes.has_key?(:'log')
+        self.log = attributes[:'log']
       end
 
     end
@@ -66,8 +51,8 @@ module Fn
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @route.nil?
-        invalid_properties.push("invalid value for 'route', route cannot be nil.")
+      if @log.nil?
+        invalid_properties.push("invalid value for 'log', log cannot be nil.")
       end
 
       return invalid_properties
@@ -76,7 +61,7 @@ module Fn
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @route.nil?
+      return false if @log.nil?
       return true
     end
 
@@ -85,9 +70,7 @@ module Fn
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          error == o.error &&
-          route == o.route
+          log == o.log
     end
 
     # @see the `==` method
@@ -99,7 +82,7 @@ module Fn
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [message, error, route].hash
+      [log].hash
     end
 
     # Builds the object from hash

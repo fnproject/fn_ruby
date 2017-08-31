@@ -8,7 +8,8 @@ Method | HTTP request | Description
 [**apps_app_routes_post**](RoutesApi.md#apps_app_routes_post) | **POST** /apps/{app}/routes | Create new Route
 [**apps_app_routes_route_delete**](RoutesApi.md#apps_app_routes_route_delete) | **DELETE** /apps/{app}/routes/{route} | Deletes the route
 [**apps_app_routes_route_get**](RoutesApi.md#apps_app_routes_route_get) | **GET** /apps/{app}/routes/{route} | Gets route by name
-[**apps_app_routes_route_patch**](RoutesApi.md#apps_app_routes_route_patch) | **PATCH** /apps/{app}/routes/{route} | Update a Route
+[**apps_app_routes_route_patch**](RoutesApi.md#apps_app_routes_route_patch) | **PATCH** /apps/{app}/routes/{route} | Update a Route, Fails if the route or app does not exist. Accepts partial updates / skips validation of zero values.
+[**apps_app_routes_route_put**](RoutesApi.md#apps_app_routes_route_put) | **PUT** /apps/{app}/routes/{route} | Create a Route if it does not exist. Update if it does. Will also create app if it does not exist. Put does not skip validation of zero values
 
 
 # **apps_app_routes_get**
@@ -63,7 +64,7 @@ No authorization required
 
 Create new Route
 
-Create a new route in an app, if app doesn't exists, it creates the app
+Create a new route in an app, if app doesn't exists, it creates the app. Post does not skip validation of zero values.
 
 ### Example
 ```ruby
@@ -210,7 +211,7 @@ No authorization required
 # **apps_app_routes_route_patch**
 > RouteWrapper apps_app_routes_route_patch(app, route, body)
 
-Update a Route
+Update a Route, Fails if the route or app does not exist. Accepts partial updates / skips validation of zero values.
 
 Update a route
 
@@ -229,11 +230,64 @@ body = Fn::RouteWrapper.new # RouteWrapper | One route to post.
 
 
 begin
-  #Update a Route
+  #Update a Route, Fails if the route or app does not exist. Accepts partial updates / skips validation of zero values.
   result = api_instance.apps_app_routes_route_patch(app, route, body)
   p result
 rescue Fn::ApiError => e
   puts "Exception when calling RoutesApi->apps_app_routes_route_patch: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **app** | **String**| name of the app. | 
+ **route** | **String**| route path. | 
+ **body** | [**RouteWrapper**](RouteWrapper.md)| One route to post. | 
+
+### Return type
+
+[**RouteWrapper**](RouteWrapper.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **apps_app_routes_route_put**
+> RouteWrapper apps_app_routes_route_put(app, route, body)
+
+Create a Route if it does not exist. Update if it does. Will also create app if it does not exist. Put does not skip validation of zero values
+
+Update or Create a route
+
+### Example
+```ruby
+# load the gem
+require 'fn_ruby'
+
+api_instance = Fn::RoutesApi.new
+
+app = "app_example" # String | name of the app.
+
+route = "route_example" # String | route path.
+
+body = Fn::RouteWrapper.new # RouteWrapper | One route to post.
+
+
+begin
+  #Create a Route if it does not exist. Update if it does. Will also create app if it does not exist. Put does not skip validation of zero values
+  result = api_instance.apps_app_routes_route_put(app, route, body)
+  p result
+rescue Fn::ApiError => e
+  puts "Exception when calling RoutesApi->apps_app_routes_route_put: #{e}"
 end
 ```
 

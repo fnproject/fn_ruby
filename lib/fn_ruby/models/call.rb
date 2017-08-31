@@ -14,29 +14,52 @@ require 'date'
 
 module Fn
 
-  class RouteWrapper
-    attr_accessor :message
+  class Call
+    # Call UUID ID.
+    attr_accessor :id
 
-    attr_accessor :error
+    # Call execution status.
+    attr_accessor :status
 
-    attr_accessor :route
+    # App name that is assigned to a route that is being executed.
+    attr_accessor :app_name
+
+    # App route that is being executed.
+    attr_accessor :path
+
+    # Time when call was submitted. Always in UTC.
+    attr_accessor :created_at
+
+    # Time when call started execution. Always in UTC.
+    attr_accessor :started_at
+
+    # Time when call completed, whether it was successul or failed. Always in UTC.
+    attr_accessor :completed_at
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message',
-        :'error' => :'error',
-        :'route' => :'route'
+        :'id' => :'id',
+        :'status' => :'status',
+        :'app_name' => :'app_name',
+        :'path' => :'path',
+        :'created_at' => :'created_at',
+        :'started_at' => :'started_at',
+        :'completed_at' => :'completed_at'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'message' => :'String',
-        :'error' => :'ErrorBody',
-        :'route' => :'Route'
+        :'id' => :'String',
+        :'status' => :'String',
+        :'app_name' => :'String',
+        :'path' => :'String',
+        :'created_at' => :'DateTime',
+        :'started_at' => :'DateTime',
+        :'completed_at' => :'DateTime'
       }
     end
 
@@ -48,16 +71,32 @@ module Fn
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'message')
-        self.message = attributes[:'message']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'route')
-        self.route = attributes[:'route']
+      if attributes.has_key?(:'app_name')
+        self.app_name = attributes[:'app_name']
+      end
+
+      if attributes.has_key?(:'path')
+        self.path = attributes[:'path']
+      end
+
+      if attributes.has_key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.has_key?(:'started_at')
+        self.started_at = attributes[:'started_at']
+      end
+
+      if attributes.has_key?(:'completed_at')
+        self.completed_at = attributes[:'completed_at']
       end
 
     end
@@ -66,17 +105,12 @@ module Fn
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @route.nil?
-        invalid_properties.push("invalid value for 'route', route cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @route.nil?
       return true
     end
 
@@ -85,9 +119,13 @@ module Fn
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message &&
-          error == o.error &&
-          route == o.route
+          id == o.id &&
+          status == o.status &&
+          app_name == o.app_name &&
+          path == o.path &&
+          created_at == o.created_at &&
+          started_at == o.started_at &&
+          completed_at == o.completed_at
     end
 
     # @see the `==` method
@@ -99,7 +137,7 @@ module Fn
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [message, error, route].hash
+      [id, status, app_name, path, created_at, started_at, completed_at].hash
     end
 
     # Builds the object from hash
