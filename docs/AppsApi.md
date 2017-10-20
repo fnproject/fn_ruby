@@ -155,11 +155,11 @@ No authorization required
 
 
 # **apps_get**
-> AppsWrapper apps_get
+> AppsWrapper apps_get(opts)
 
 Get all app names.
 
-Get a list of all the apps in the system.
+Get a list of all the apps in the system, returned in alphabetical order.
 
 ### Example
 ```ruby
@@ -168,9 +168,14 @@ require 'fn_ruby'
 
 api_instance = Fn::AppsApi.new
 
+opts = { 
+  cursor: "cursor_example", # String | Cursor from previous response.next_cursor to begin results after, if any.
+  per_page: 56 # Integer | Number of results to return, defaults to 30. Max of 100.
+}
+
 begin
   #Get all app names.
-  result = api_instance.apps_get
+  result = api_instance.apps_get(opts)
   p result
 rescue Fn::ApiError => e
   puts "Exception when calling AppsApi->apps_get: #{e}"
@@ -178,7 +183,11 @@ end
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cursor** | **String**| Cursor from previous response.next_cursor to begin results after, if any. | [optional] 
+ **per_page** | **Integer**| Number of results to return, defaults to 30. Max of 100. | [optional] 
 
 ### Return type
 

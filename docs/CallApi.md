@@ -164,7 +164,7 @@ No authorization required
 
 Get app-bound calls.
 
-Get app-bound calls can filter to route-bound calls.
+Get app-bound calls can filter to route-bound calls, results returned in created_at, descending order (newest first).
 
 ### Example
 ```ruby
@@ -176,7 +176,11 @@ api_instance = Fn::CallApi.new
 app = "app_example" # String | App name.
 
 opts = { 
-  route: "route_example" # String | App route.
+  path: "path_example", # String | Route path to match, exact.
+  cursor: "cursor_example", # String | Cursor from previous response.next_cursor to begin results after, if any.
+  per_page: 56, # Integer | Number of results to return, defaults to 30. Max of 100.
+  from_time: 56, # Integer | Unix timestamp in seconds, of call.created_at to begin the results at, default 0.
+  to_time: 56 # Integer | Unix timestamp in seconds, of call.created_at to end the results at, defaults to latest.
 }
 
 begin
@@ -193,7 +197,11 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **app** | **String**| App name. | 
- **route** | **String**| App route. | [optional] 
+ **path** | **String**| Route path to match, exact. | [optional] 
+ **cursor** | **String**| Cursor from previous response.next_cursor to begin results after, if any. | [optional] 
+ **per_page** | **Integer**| Number of results to return, defaults to 30. Max of 100. | [optional] 
+ **from_time** | **Integer**| Unix timestamp in seconds, of call.created_at to begin the results at, default 0. | [optional] 
+ **to_time** | **Integer**| Unix timestamp in seconds, of call.created_at to end the results at, defaults to latest. | [optional] 
 
 ### Return type
 

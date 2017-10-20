@@ -13,11 +13,11 @@ Method | HTTP request | Description
 
 
 # **apps_app_routes_get**
-> RoutesWrapper apps_app_routes_get(app)
+> RoutesWrapper apps_app_routes_get(app, opts)
 
 Get route list by app name.
 
-This will list routes for a particular app.
+This will list routes for a particular app, returned in alphabetical order.
 
 ### Example
 ```ruby
@@ -28,10 +28,15 @@ api_instance = Fn::RoutesApi.new
 
 app = "app_example" # String | Name of app for this set of routes.
 
+opts = { 
+  image: "image_example", # String | Route image to match, exact.
+  cursor: "cursor_example", # String | Cursor from previous response.next_cursor to begin results after, if any.
+  per_page: 56 # Integer | Number of results to return, defaults to 30. Max of 100.
+}
 
 begin
   #Get route list by app name.
-  result = api_instance.apps_app_routes_get(app)
+  result = api_instance.apps_app_routes_get(app, opts)
   p result
 rescue Fn::ApiError => e
   puts "Exception when calling RoutesApi->apps_app_routes_get: #{e}"
@@ -43,6 +48,9 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **app** | **String**| Name of app for this set of routes. | 
+ **image** | **String**| Route image to match, exact. | [optional] 
+ **cursor** | **String**| Cursor from previous response.next_cursor to begin results after, if any. | [optional] 
+ **per_page** | **Integer**| Number of results to return, defaults to 30. Max of 100. | [optional] 
 
 ### Return type
 
