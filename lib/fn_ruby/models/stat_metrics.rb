@@ -14,83 +14,53 @@ require 'date'
 
 module Fn
 
-  class Route
-    # URL path that will be matched to this route
-    attr_accessor :path
+  class StatMetrics
+    attr_accessor :net_rx
 
-    # Name of Docker image to use in this route. You should include the image tag, which should be a version number, to be more accurate. Can be overridden on a per route basis with route.image.
-    attr_accessor :image
+    attr_accessor :net_tx
 
-    # Map of http headers that will be sent with the response
-    attr_accessor :headers
+    attr_accessor :mem_limit
 
-    # Max usable memory for this route (MiB).
-    attr_accessor :memory
+    attr_accessor :mem_usage
 
-    # Route type
-    attr_accessor :type
+    attr_accessor :disk_read
 
-    # Payload format sent into function.
-    attr_accessor :format
+    attr_accessor :disk_write
 
-    # Route configuration - overrides application configuration
-    attr_accessor :config
+    attr_accessor :cpu_user
 
-    # Timeout for executions of this route. Value in Seconds
-    attr_accessor :timeout
+    attr_accessor :cpu_total
 
-    # Hot functions idle timeout before termination. Value in Seconds
-    attr_accessor :idle_timeout
+    attr_accessor :cpu_kernel
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'path' => :'path',
-        :'image' => :'image',
-        :'headers' => :'headers',
-        :'memory' => :'memory',
-        :'type' => :'type',
-        :'format' => :'format',
-        :'config' => :'config',
-        :'timeout' => :'timeout',
-        :'idle_timeout' => :'idle_timeout'
+        :'net_rx' => :'net_rx',
+        :'net_tx' => :'net_tx',
+        :'mem_limit' => :'mem_limit',
+        :'mem_usage' => :'mem_usage',
+        :'disk_read' => :'disk_read',
+        :'disk_write' => :'disk_write',
+        :'cpu_user' => :'cpu_user',
+        :'cpu_total' => :'cpu_total',
+        :'cpu_kernel' => :'cpu_kernel'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'path' => :'String',
-        :'image' => :'String',
-        :'headers' => :'Hash<String, Array<String>>',
-        :'memory' => :'Integer',
-        :'type' => :'String',
-        :'format' => :'String',
-        :'config' => :'Hash<String, String>',
-        :'timeout' => :'Integer',
-        :'idle_timeout' => :'Integer'
+        :'net_rx' => :'Integer',
+        :'net_tx' => :'Integer',
+        :'mem_limit' => :'Integer',
+        :'mem_usage' => :'Integer',
+        :'disk_read' => :'Integer',
+        :'disk_write' => :'Integer',
+        :'cpu_user' => :'Integer',
+        :'cpu_total' => :'Integer',
+        :'cpu_kernel' => :'Integer'
       }
     end
 
@@ -102,48 +72,40 @@ module Fn
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'path')
-        self.path = attributes[:'path']
+      if attributes.has_key?(:'net_rx')
+        self.net_rx = attributes[:'net_rx']
       end
 
-      if attributes.has_key?(:'image')
-        self.image = attributes[:'image']
+      if attributes.has_key?(:'net_tx')
+        self.net_tx = attributes[:'net_tx']
       end
 
-      if attributes.has_key?(:'headers')
-        if (value = attributes[:'headers']).is_a?(Array)
-          self.headers = value
-        end
+      if attributes.has_key?(:'mem_limit')
+        self.mem_limit = attributes[:'mem_limit']
       end
 
-      if attributes.has_key?(:'memory')
-        self.memory = attributes[:'memory']
+      if attributes.has_key?(:'mem_usage')
+        self.mem_usage = attributes[:'mem_usage']
       end
 
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.has_key?(:'disk_read')
+        self.disk_read = attributes[:'disk_read']
       end
 
-      if attributes.has_key?(:'format')
-        self.format = attributes[:'format']
+      if attributes.has_key?(:'disk_write')
+        self.disk_write = attributes[:'disk_write']
       end
 
-      if attributes.has_key?(:'config')
-        if (value = attributes[:'config']).is_a?(Array)
-          self.config = value
-        end
+      if attributes.has_key?(:'cpu_user')
+        self.cpu_user = attributes[:'cpu_user']
       end
 
-      if attributes.has_key?(:'timeout')
-        self.timeout = attributes[:'timeout']
-      else
-        self.timeout = 30
+      if attributes.has_key?(:'cpu_total')
+        self.cpu_total = attributes[:'cpu_total']
       end
 
-      if attributes.has_key?(:'idle_timeout')
-        self.idle_timeout = attributes[:'idle_timeout']
-      else
-        self.idle_timeout = 30
+      if attributes.has_key?(:'cpu_kernel')
+        self.cpu_kernel = attributes[:'cpu_kernel']
       end
 
     end
@@ -158,31 +120,7 @@ module Fn
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ["sync", "async"])
-      return false unless type_validator.valid?(@type)
-      format_validator = EnumAttributeValidator.new('String', ["default", "http", "json"])
-      return false unless format_validator.valid?(@format)
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["sync", "async"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] format Object to be assigned
-    def format=(format)
-      validator = EnumAttributeValidator.new('String', ["default", "http", "json"])
-      unless validator.valid?(format)
-        fail ArgumentError, "invalid value for 'format', must be one of #{validator.allowable_values}."
-      end
-      @format = format
     end
 
     # Checks equality by comparing each attribute.
@@ -190,15 +128,15 @@ module Fn
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          path == o.path &&
-          image == o.image &&
-          headers == o.headers &&
-          memory == o.memory &&
-          type == o.type &&
-          format == o.format &&
-          config == o.config &&
-          timeout == o.timeout &&
-          idle_timeout == o.idle_timeout
+          net_rx == o.net_rx &&
+          net_tx == o.net_tx &&
+          mem_limit == o.mem_limit &&
+          mem_usage == o.mem_usage &&
+          disk_read == o.disk_read &&
+          disk_write == o.disk_write &&
+          cpu_user == o.cpu_user &&
+          cpu_total == o.cpu_total &&
+          cpu_kernel == o.cpu_kernel
     end
 
     # @see the `==` method
@@ -210,7 +148,7 @@ module Fn
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [path, image, headers, memory, type, format, config, timeout, idle_timeout].hash
+      [net_rx, net_tx, mem_limit, mem_usage, disk_read, disk_write, cpu_user, cpu_total, cpu_kernel].hash
     end
 
     # Builds the object from hash
