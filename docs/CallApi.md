@@ -5,7 +5,6 @@ All URIs are relative to *https://127.0.0.1:8080/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**apps_app_calls_call_get**](CallApi.md#apps_app_calls_call_get) | **GET** /apps/{app}/calls/{call} | Get call information
-[**apps_app_calls_call_log_delete**](CallApi.md#apps_app_calls_call_log_delete) | **DELETE** /apps/{app}/calls/{call}/log | Delete call log entry
 [**apps_app_calls_call_log_get**](CallApi.md#apps_app_calls_call_log_get) | **GET** /apps/{app}/calls/{call}/log | Get call logs
 [**apps_app_calls_get**](CallApi.md#apps_app_calls_get) | **GET** /apps/{app}/calls | Get app-bound calls.
 
@@ -48,55 +47,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CallWrapper**](CallWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-
-# **apps_app_calls_call_log_delete**
-> apps_app_calls_call_log_delete(call, app)
-
-Delete call log entry
-
-Delete call log entry
-
-### Example
-```ruby
-# load the gem
-require 'fn_ruby'
-
-api_instance = Fn::CallApi.new
-
-call = "call_example" # String | Call ID.
-
-app = "app_example" # String | App name.
-
-
-begin
-  #Delete call log entry
-  api_instance.apps_app_calls_call_log_delete(call, app)
-rescue Fn::ApiError => e
-  puts "Exception when calling CallApi->apps_app_calls_call_log_delete: #{e}"
-end
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **call** | **String**| Call ID. | 
- **app** | **String**| App name. | 
-
-### Return type
-
-nil (empty response body)
 
 ### Authorization
 

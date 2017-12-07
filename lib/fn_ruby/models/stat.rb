@@ -14,83 +14,25 @@ require 'date'
 
 module Fn
 
-  class Route
-    # URL path that will be matched to this route
-    attr_accessor :path
+  class Stat
+    attr_accessor :timestamp
 
-    # Name of Docker image to use in this route. You should include the image tag, which should be a version number, to be more accurate. Can be overridden on a per route basis with route.image.
-    attr_accessor :image
+    attr_accessor :metrics
 
-    # Map of http headers that will be sent with the response
-    attr_accessor :headers
-
-    # Max usable memory for this route (MiB).
-    attr_accessor :memory
-
-    # Route type
-    attr_accessor :type
-
-    # Payload format sent into function.
-    attr_accessor :format
-
-    # Route configuration - overrides application configuration
-    attr_accessor :config
-
-    # Timeout for executions of this route. Value in Seconds
-    attr_accessor :timeout
-
-    # Hot functions idle timeout before termination. Value in Seconds
-    attr_accessor :idle_timeout
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'path' => :'path',
-        :'image' => :'image',
-        :'headers' => :'headers',
-        :'memory' => :'memory',
-        :'type' => :'type',
-        :'format' => :'format',
-        :'config' => :'config',
-        :'timeout' => :'timeout',
-        :'idle_timeout' => :'idle_timeout'
+        :'timestamp' => :'timestamp',
+        :'metrics' => :'metrics'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'path' => :'String',
-        :'image' => :'String',
-        :'headers' => :'Hash<String, Array<String>>',
-        :'memory' => :'Integer',
-        :'type' => :'String',
-        :'format' => :'String',
-        :'config' => :'Hash<String, String>',
-        :'timeout' => :'Integer',
-        :'idle_timeout' => :'Integer'
+        :'timestamp' => :'DateTime',
+        :'metrics' => :'StatMetrics'
       }
     end
 
@@ -102,48 +44,12 @@ module Fn
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'path')
-        self.path = attributes[:'path']
+      if attributes.has_key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
       end
 
-      if attributes.has_key?(:'image')
-        self.image = attributes[:'image']
-      end
-
-      if attributes.has_key?(:'headers')
-        if (value = attributes[:'headers']).is_a?(Array)
-          self.headers = value
-        end
-      end
-
-      if attributes.has_key?(:'memory')
-        self.memory = attributes[:'memory']
-      end
-
-      if attributes.has_key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.has_key?(:'format')
-        self.format = attributes[:'format']
-      end
-
-      if attributes.has_key?(:'config')
-        if (value = attributes[:'config']).is_a?(Array)
-          self.config = value
-        end
-      end
-
-      if attributes.has_key?(:'timeout')
-        self.timeout = attributes[:'timeout']
-      else
-        self.timeout = 30
-      end
-
-      if attributes.has_key?(:'idle_timeout')
-        self.idle_timeout = attributes[:'idle_timeout']
-      else
-        self.idle_timeout = 30
+      if attributes.has_key?(:'metrics')
+        self.metrics = attributes[:'metrics']
       end
 
     end
@@ -158,31 +64,7 @@ module Fn
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      type_validator = EnumAttributeValidator.new('String', ["sync", "async"])
-      return false unless type_validator.valid?(@type)
-      format_validator = EnumAttributeValidator.new('String', ["default", "http", "json"])
-      return false unless format_validator.valid?(@format)
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["sync", "async"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] format Object to be assigned
-    def format=(format)
-      validator = EnumAttributeValidator.new('String', ["default", "http", "json"])
-      unless validator.valid?(format)
-        fail ArgumentError, "invalid value for 'format', must be one of #{validator.allowable_values}."
-      end
-      @format = format
     end
 
     # Checks equality by comparing each attribute.
@@ -190,15 +72,8 @@ module Fn
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          path == o.path &&
-          image == o.image &&
-          headers == o.headers &&
-          memory == o.memory &&
-          type == o.type &&
-          format == o.format &&
-          config == o.config &&
-          timeout == o.timeout &&
-          idle_timeout == o.idle_timeout
+          timestamp == o.timestamp &&
+          metrics == o.metrics
     end
 
     # @see the `==` method
@@ -210,7 +85,7 @@ module Fn
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [path, image, headers, memory, type, format, config, timeout, idle_timeout].hash
+      [timestamp, metrics].hash
     end
 
     # Builds the object from hash
